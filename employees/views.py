@@ -1,4 +1,5 @@
 from django.shortcuts import render
+#
 from .models import Department, Employee, About, Contact
 
 def index(request):
