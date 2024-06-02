@@ -1,0 +1,47 @@
+ստեղծում ենք  Django պրոյեկտ
+(Jango admin ստեղծիր պրոյեկտ basa անունով)
+django-admin startproject base .
+
+2. manage.py ամենակարեւոր ֆայլն է
+(ամեն ինչ ինքն է կառավարում)
+
+3. pipenv shell ով ակտիվացնում ենք vertual inventy
+
+4.run ենք անում django սերվերը
+python manage.py runserver
+
+5.python manage.py startapp (app- ի անունն է)
+
+6.python manage.py migrate
+
+7.python manage.py createsuperuser
+    login: jackmarton
+    email: marton@gmail.com
+    password:qaser#312
+
+8. python manage.py makemigrations   սրանից հետո անպայման python manage.py migrate
+ անում, որ գնա հասնի DB տվյալների բազա
+
+ MODELS 
+ CLASS.objects.all() -DB-ից ստանում ենք այդ թեյբլի ինֆորմացիան
+ dep() = SOME(title="IT") IT֊ն փոխանցում ենք SOME կլասի
+                          կոնստրուկտորի մեջ
+ dep.save() ->DB-ում պահպանում ենք փոփոխությունը
+ SOME.objects.get(pk=1) -> ստանում ենք 1 ID ունեցող տվյալը
+ SOME.objects.filter(title="IT")
+ SOME.objects.filter(id=1)
+
+--------------
+
+GIT
+
+U - untracked (գիտը տեսնում բայց չի հետեւում)
+A - added  (գիտը արդեն հետեւում է փոփոխություններին)
+M - modified  (գիտը տեսել է փոփոխություն ու պահպանել է իր մեջ)
+
+git init ( կանչում ենք  git ֊ը)
+git statuse (մեր պրոյեկտի ստատուսը )
+git add . (բոլոր  untracted ֆայլ/ֆոլդրները դարձնում ենք added )
+git commit -m "your commit"
+git log ( տեսնում ենք մեր commit ները)
+git show (տեսնում ենք փոփոխություները , դուրս ենք գալիս q կամ ctrl + C)
