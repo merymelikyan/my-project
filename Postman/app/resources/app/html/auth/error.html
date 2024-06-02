@@ -1,0 +1,45 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=320, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="../../js/authentication.css">
+    <style>
+      body, html {
+        background: #FFFFFF;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica, Arial, sans-serif;
+      }
+      body {
+        display: flex;
+      }
+    </style>
+    <script src="../../js/preload.js"></script>
+  </head>
+  <body>
+    <div class="error-block">
+      <div class="img"></div>
+      <h2>Unable to connect to our servers</h2>
+      <h3>Check if your internet connection is stable. If you are using a firewall or a proxy server, disable it or whitelist <u>getpostman.com</u> and then retry. If the problem persists, try again after some time. (Error code: <span id="error-code"></span>)</h3>
+      <div class="error-code">
+      </div>
+      <button id="go-to-app">Go To Scratchpad</button>
+      <button id="retry-btn">Try Again</button>
+    </div>
+
+    <script>
+      const { ipcRenderer, ipcMain } = require('electron');
+      document.getElementById('retry-btn').onclick = function () {
+        window.location.assign(decodeURIComponent(location.search.substr(1)));
+      }
+      document.getElementById('go-to-app').onclick = function () {
+        ipcRenderer.sendToHost('auth-error', 'go-to-scratchpad');
+      }
+
+      function addErrorCode(errorCode) {
+        document.getElementById('error-code').textContent = errorCode;
+      }
+
+      function setGoToAppMessage(isEnterpriseApp) {
+        document.getElementById('go-to-app').textContent = isEnterpriseApp ? 'Go To Scratchpad' : 'Go to Lightweight API Client'
+      }
+    </script>
+</body>
+</html>

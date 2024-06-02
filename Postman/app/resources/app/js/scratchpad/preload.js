@@ -1,0 +1,1 @@
+window.SDK_PLATFORM=process.env.SDK_PLATFORM||"desktop",window.pm=window.pm||{},document.addEventListener("dragover",(e=>{e.preventDefault()}),!1),document.addEventListener("drop",(e=>{e.preventDefault()}),!1);

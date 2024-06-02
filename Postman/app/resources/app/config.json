@@ -1,0 +1,26 @@
+{
+  "__WP_SENTRY_DSN__": "'https://52ca006e8fe34fc8a0ee37d788ecf4e5@o1224273.ingest.sentry.io/6468310'",
+  "__WP_NEWRELIC_ACCOUNT_ID__": "'2665918'",
+  "__WP_NEWRELIC_INGEST_KEY__": "'76181f7d4e7d9da79524eb560573dafbFFFFNRAL'",
+  "__WP_ENABLE_CRASH_REPORTING__": true,
+  "__WP_RELEASE_CHANNEL__": "'prod'",
+  "__WP_INTERCEPTOR_APP_ID__": "'aicmkgpgakddgnaphhhpliifpcfhicfo'",
+  "__WP_INTERCEPTOR_DEPENDENCIES_DOWNLOAD_URL__": "'https://go.pstmn.io/interceptor-dependencies'",
+  "__WP_INTERCEPTOR_MANIFEST_FILENAME__": "'com.postman.postmanapp'",
+  "__WP_INTERCEPTOR_BRIDGE_SOCKET_NAME__": "'postman'",
+  "__WP_GOD_INTEGRATIONS__URL": "'https://app.getpostman.com'",
+  "__WP_CAPTIVE_PORTAL_WEB_PROXY_CONFIRMATION_URL_": "'https://st-ar.cdn.postman.com/webgatewayproxy.html'",
+  "__WP_DESKTOP_UI_UPDATE_URL__": "'https://desktop.postman.com'",
+  "__WP_BUILD_SCRATCHPAD__": true,
+  "__WP_ANALYTICS_URL__": "'https://events.getpostman.com/events'",
+  "__WP_ANALYTICS_CLICK_EVENT_URL__": "'https://events.getpostman.com/click-events'",
+  "__WP_ENV__": "'production'",
+  "__WP_IDENTITY_URL__": "'https://identity.getpostman.com'",
+  "__WP_GLOBAL_IDENTITY_URL__": "'https://auth.postman.com'",
+  "__WP_VAULT_AZURE_APP_ID__": "'ea8d5e35-ebe1-4a78-a632-6804b6d5e296'",
+  "__WP_VAULT_AZURE_SCOPES__": [
+    "'https://vault.azure.net/user_impersonation'"
+  ],
+  "__WP_VAULT_AUTH_REDIRECT_URL__": "'http://127.0.0.1:10534'",
+  "__WP_MODULE_FEDERATION__": false
+}

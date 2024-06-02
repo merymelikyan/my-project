@@ -1,0 +1,99 @@
+{
+  "top_menu": {
+    "file": {
+      "new": "New...",
+      "new_tab": "New Tab",
+      "new_runner_tab": "New Runner Tab",
+      "new_postman_window": "New Postman Window",
+      "import": "Import...",
+      "settings": "Settings",
+      "close_window": "Close Window",
+      "close_tab": "Close Tab",
+      "force_close_tab": "Force Close Tab",
+      "file_label": "File",
+      "quit_win": "Exit",
+      "quit_linux": "Quit"
+    },
+    "osx_app": {
+      "about": "About {{appName}}",
+      "check_updates": "Check for Updates...",
+      "preferences": "Preferences",
+      "services": "Services",
+      "hide_app": "Hide {{appName}}",
+      "hide_others": "Hide Others",
+      "show_all": "Show All",
+      "quit": "Quit {{appName}}"
+    },
+    "edit": {
+      "edit_label": "Edit",
+      "undo": "Undo",
+      "redo": "Redo",
+      "cut": "Cut",
+      "copy": "Copy",
+      "paste": "Paste",
+      "paste_match_style": "Paste and Match Style",
+      "delete": "Delete",
+      "select_all": "Select All"
+    },
+    "view": {
+      "view_label": "View",
+      "toggle_full_screen": "Toggle Full Screen",
+      "zoom_in": "Zoom In",
+      "zoom_out": "Zoom Out",
+      "reset_zoom": "Reset Zoom",
+      "toggle_sidebar": "Toggle Sidebar",
+      "toggle_two_pane": "Toggle Two-Pane View",
+      "show_console": "Show Postman Console",
+      "developer": {
+        "label": "Developer",
+        "show_devtools": "Show DevTools (Current View)",
+        "view_logs": "View Logs in Finder",
+        "view_logs_win": "View Logs in Explorer",
+        "view_logs_linux": "View Logs in File Manager"
+      }
+    },
+    "window": {
+      "window_label": "Window",
+      "minimize": "Minimize",
+      "zoom": "Zoom",
+      "close_window": "Close Window",
+      "go_back": "Go Back",
+      "go_forward": "Go Forward",
+      "next_tab": "Next Tab",
+      "prev_tab": "Previous Tab",
+      "bring_to_front": "Bring All to Front"
+    },
+    "help": {
+      "help_label": "Help",
+      "setup_web_gateway": "Setup Web Gateway Support",
+      "clear_cache_reload": "Clear Cache and Reload",
+      "documentation": "Documentation",
+      "github": "GitHub",
+      "twitter": "Twitter",
+      "support": "Support",
+      "check_updates": "Check for Updates"
+    }
+  },
+  "dock_menu": {
+    "new_collection": "New Collection",
+    "new_window": "New Window"
+  },
+  "gpu": {
+    "disable": "Disable Hardware Acceleration",
+    "enable": "Enable Hardware Acceleration",
+    "enable_confirm_description": "You are about to enable hardware acceleration. The application needs to be restarted for this change to take effect.",
+    "enable_confirm_title": "Enabling Hardware Acceleration",
+    "disable_confirm_description": "You are about to disable hardware acceleration. The application needs to be restarted for this change to take effect.",
+    "disable_confirm_title": "Disabling Hardware Acceleration",
+    "relaunch_cancel": "Cancel",
+    "relaunch_restart": "Restart"
+  },
+  "new_account_region_preference": {
+    "top_label": "Region Preference for New Accounts",
+    "preferences_label": {
+      "use_us_region": "Use US Region by Default",
+      "use_eu_region": "Use EU Region by Default",
+      "always_prompt": "Always Ask for Region Selection"
+    }
+  }
+}

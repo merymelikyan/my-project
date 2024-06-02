@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; connect-src *; img-src data: *; media-src data:; frame-src file: data:; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; worker-src 'self' blob:;"
+    >
+    <title>Postman Webview</title>
+    <script src="../js/scratchpad/preload.js"></script>
+    <link rel="preload" href="../js/scratchpad/scratchpad.css" as="style">
+    <link rel="preload" href="../js/scratchpad/scratchpad.js" as='script'>
+
+    <style>
+      .pm-loader.is-exiting {
+        opacity: 0;
+      }
+
+      .pm-loader.is-hidden {
+        display: none;
+      }
+
+      body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        position: absolute;
+      }
+
+      .pm-loader {
+        width: 100%;
+        height: 100%;
+        z-index: 300;
+        background: var(--background-color-primary, #FFFFFF);
+      }
+
+      .pm-loader-container {
+        height: 100%;
+        display: flex;
+      }
+
+      .app-root {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+      }
+
+      .app-root.is-hidden {
+        display: none;
+      }
+      .requester-shell-loading-indicator-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 20px;
+      }
+
+      .aether-spinner {
+        display: flex;
+        justify-content: space-between;
+        width: var(--size-xs, 16px);
+        height: var(--size-xs, 16px);
+        text-align: center;
+        font-size: var(--text-size-xs, 10px);
+      }
+
+      .aether-spinner > div {
+        height: 100%;
+        width: 4px;
+        background-color: var(--content-color-tertiary, #A6A6A6);
+        opacity: 0.2;
+        border-radius: var(--border-radius-default, 4px);
+        animation: spinner-bounce 0.6s infinite ease-in-out;
+        transform-origin: center center;
+      }
+
+      .aether-spinner > .rect-two {
+        animation-delay: 0.15s;
+      }
+
+      .aether-spinner > .rect-three {
+        animation-delay: 0.3s;
+      }
+
+      .requester-shell-loader {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .requester-shell-loader-main-header {
+        height: 40px;
+        background-color: var(--background-color-primary, #FFFFFF);
+        box-shadow: inset 0 -1px 0 var(--bg-tertiary, #ECECEC);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .requester-shell-loader-main-header__section-left {
+        padding: var(--spacing-l, 16px);
+      }
+      .requester-shell-loader-main-header__section-left, .requester-shell-loader-main-header__section-right {
+        display: flex;
+        align-items: center;
+      }
+
+      .item-tabs {
+        height: var(--size-s, 24px);
+        width: 50px;
+        border-radius: var(--border-radius-default, 4px);
+        background-color: var(--color-highlight-background-primary, #F2F2F2);
+        margin-right: var(--spacing-xxl, 32px);
+      }
+
+      .item-tabs-home { width: 40px; }
+      .item-tabs-build { width: 110px; }
+
+      .requester-shell-loader-searchbox {
+        height: var(--size-m, 32px);
+        width: 300px;
+        border-radius: var(--border-radius-default, 4px);
+        background-color: var(--color-highlight-background-primary, #F2F2F2);
+        margin-right: var(--spacing-xxxl);
+      }
+
+      .item-circle {
+        height: var(--size-s, 24px);
+        width: var(--size-s, 24px);
+        border-radius: var(--border-radius-max, 100%);
+        background-color: var(--color-highlight-background-primary, #F2F2F2);
+        padding: var(--spacing-xs, 4px);
+        margin: var(--spacing-zero, 0px) var(--spacing-xs, 4px);
+      }
+      .item-rectangle {
+        height: var(--size-m, 32px);
+        width: 96px;
+        background-color: var(--color-highlight-background-primary, #F2F2F2);
+        border-radius: var(--border-radius-default, 4px);
+        margin: var(--spacing-zero, 0px) var(--spacing-s, 8px);
+      }
+      .item-invite {
+        height: var(--size-m, 32px);
+        width: 62px;
+        background-color: var(--color-highlight-background-primary, #F2F2F2);
+        border-radius: var(--border-radius-default, 4px);
+        margin: var(--spacing-zero, 0px) var(--spacing-s, 8px);
+      }
+
+      .requester-shell-loader-main-content {
+        display: flex;
+        flex: 1;
+        -webkit-animation: fade 1s linear infinite;
+        -moz-animation: fade 1s linear infinite;
+        -o-animation: fade 1s linear infinite;
+        animation: fade 1s linear infinite;
+      }
+
+      .requester-shell-loader-tab-main-content {
+        flex: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--background-color-primary, #FFFFFF);
+      }
+
+      .requester-shell-loader-sidebar {
+        flex: 1;
+        max-width: 380px;
+        background-color: var(--color-highlight-background-primary, #F2F2F2);
+      }
+
+      .requester-shell-loader-main-tab {
+        height: var(--size-m, 32px);
+        background-color: var(--background-color-primary, #FFFFFF);
+      }
+
+      .requester-shell-loader-tab-content-panes {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .requester-shell-loader-tab-content-pane {
+        display: flex;
+        flex: 0 0 50%;
+        flex-direction: column;
+      }
+
+      .requester-shell-loader .requester-contents-top {
+        padding-right: var(--spacing-l, 16px);
+      }
+
+      .requester-shell-loader .flexed {
+        display: flex;
+      }
+
+      .requester-shell-loader .request-editor__tabs-wrapper {
+        display: flex;
+        justify-content: space-between;
+        flex: 1;
+        margin-bottom: var(--spacing-xs, 4px);
+        flex-direction: column;
+      }
+      .tab-main-content-shell-thumbnail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 350px;
+      }
+      .tab-main-content-shell-thumbnail path {
+        color: var(--color-highlight-background-primary, #F2F2F2);
+      }
+      .requester-shell-loader .strip {
+        background-color: var(--color-highlight-background-primary, #F2F2F2);
+        margin: var(--spacing-xs, 4px) var(--spacing-m, 12px);
+        border-radius: var(--border-radius-default, 4px);
+      }
+
+      .requester-shell-loader .url {
+        flex: 1;
+        height: var(--size-m, 32px);
+        margin: var(--spacing-m, 12px);
+        border-radius: var(--border-radius-default, 4px);
+        background-color: var(--color-highlight-background-primary, #F2F2F2);
+        margin-right: var(--spacing-m, 12px);
+        width: 256px;
+      }
+
+      .strip-longest {
+        width: 512px;
+        height: var(--size-m, 32px);
+      }
+
+      .strip-shortest {
+        width: 128px;
+        height: var(--size-m, 32px);
+      }
+
+      @keyframes fade {
+        0% { opacity: 0.25; }
+        50% { opacity: 1; }
+        100% { opacity: 0.25; }
+      }
+
+      @-webkit-keyframes fade {
+        0% { opacity: 0.25; }
+        50% { opacity: 1; }
+        100% { opacity: 0.25; }
+      }
+
+      @-moz-keyframes fade {
+        0% { opacity: 0.25; }
+        50% { opacity: 1; }
+        100% { opacity: 0.25; }
+      }
+
+      @-o-keyframes fade {
+        0% { opacity: 0.25; }
+        50% { opacity: 1; }
+        100% { opacity: 0.25; }
+      }
+
+      @keyframes fade {
+        0% { opacity: 0.25; }
+        50% { opacity: 1; }
+        100% { opacity: 0.25; }
+      }
+
+      @keyframes spinner-bounce {
+        0%, 100% { transform: scaleY(0.4); opacity: 0.8;}
+        50% { transform: scaleY(1); opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../js/scratchpad/scratchpad.css">
+    <style id='theme'></style>
+    <div class='pm-loader'>
+      <div class="pm-loader-container">
+        <div class='requester-shell-loader'>
+          <div class='requester-shell-loader-main-header'>
+          </div>
+          <div class='requester-shell-loader-main-content'>
+            <div class="requester-shell-loading-indicator-wrapper">
+              <div class='aether-spinner'>
+                <div class='rect-one'></div>
+                <div class='rect-two'></div>
+                <div class='rect-three'></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='app-root' id='app-root'></div>
+    <div class="aether-portals">
+      <div id="aether-toast-notifications__container"></div>
+      <div id="aether-popover-portal"></div>
+      <div id="aether-tab-portal"></div>
+      <div id="aether-breadcrumb-portal"></div>
+      <div id="aether-dropdown-portal"></div>
+    </div>
+    <script type="text/javascript" src="../js/scratchpad/scratchpad.js"></script>
+  </body>
+</html>

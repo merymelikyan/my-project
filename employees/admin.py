@@ -1,7 +1,36 @@
 from django.contrib import admin
-from . import models
+from .models import Department, Employee, About, Contact
 
-admin.site.register(models.Department)
-admin.site.register(models.Employee)
-admin.site.register(models.About)
-admin.site.register(models.Contact)
+
+admin.site.site_header = "Employees Admin"
+admin.site.site_title = "Employees Admin Panel"
+admin.site.index_title = "Welcome dear Employees Admin"
+
+class EmployeeAdmin(admin.ModelAdmin):
+    list_display = ("id", "first_name", "last_name",
+                    "email", "salary", "is_married")
+
+
+class EmployeeInline(admin.TabularInline):
+    model = Employee
+    exclude = ["contract_exp", "created_at"]
+    exstra = 1
+
+
+class DepartmentAdmin(admin.ModelAdmin):
+    list_display = ("id", "title")
+    fieldsets = [
+        (None, {"fields": ["title"]}),
+        ("Dates", {
+            "fields": ["created_at"],
+            "classes": ["collapse"]
+        })
+    ]
+    inlines = [EmployeeInline]
+
+
+
+admin.site.register(Department, DepartmentAdmin)
+admin.site.register(Employee, EmployeeAdmin)
+admin.site.register(About)
+admin.site.register(Contact)
