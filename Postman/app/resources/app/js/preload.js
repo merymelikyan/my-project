@@ -1,1 +1,0 @@
-window.SDK_PLATFORM=process.env.SDK_PLATFORM||"desktop",window.disableScratchpadForSignedIn=!1,document.addEventListener("dragover",(e=>{e.preventDefault()}),!1),document.addEventListener("drop",(e=>{e.preventDefault()}),!1);

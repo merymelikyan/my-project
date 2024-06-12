@@ -1,1 +1,0 @@
-!function(){window.postman_env="production";const e=pm.sdk&&pm.sdk.IPC;e.subscribe("shellMessage",(function(n,s={}){"getShellData"===s.type&&(pm.logger.info("handleMessageInShell: Got request for shell data from main. Sending"),e.send("shellData",{...localStorage}))}))}();

@@ -1,1 +1,0 @@
-const isElectron=()=>!("undefined"==typeof process||"object"!=typeof process.versions||!process.versions.electron)||"object"==typeof navigator&&"string"==typeof navigator.userAgent&&navigator.userAgent.toLowerCase().indexOf("electron")>=0;window=window||{},module.exports={isElectron:isElectron};
