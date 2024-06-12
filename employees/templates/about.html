@@ -6,12 +6,28 @@
 
 {% block about_template %}  
     <div class="mt-5">
-        <h1>About</h1> 
+        <h1>About Us</h1> 
         <article>
             {% for about in about_text %}
                 <h1>{{ about.title }}</h1>
                 <p>{{ about.body }}</p>
             {% endfor %}
         </article>
+        <h2 class="mt-4">Our Team</h2>
+        <div class="mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <img src="" alt="">
+                    <h3>Jack Marton</h3>
+                </div>
+                <div class="card-body">
+                    <h4>Project Owner</h4>  
+                    <p>About Beautiful Armenia</p>
+                </div>
+                <div class="card-footer">
+                    <a href="" class="btn btn-success d-block">Read More</a> 
+                </div>
+            </div>
+        </div>
     </div>     
 {% endblock %} 
