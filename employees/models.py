@@ -26,7 +26,6 @@ class Employee(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name} | {self.department}"
 
-
     class Meta:
         verbose_name = "employee"
         verbose_name_plural = "employees"
@@ -63,7 +62,7 @@ class Team(models.Model):
     position = models.CharField(max_length=55)
     about = models.TextField(max_length=255)
     avatar = models.ImageField(
-        upload_to="uploads/team")
+        upload_to= "team")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} | {self.position}"

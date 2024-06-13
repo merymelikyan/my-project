@@ -8,7 +8,7 @@ admin.site.index_title = "Welcome dear Employees Admin"
 
 class EmployeeAdmin(admin.ModelAdmin):
     list_display = ("id", "first_name", "last_name",
-                    "email", "salary", "is_married")
+                    "email", "salary", "is_married", "id")
 
 
 class EmployeeInline(admin.TabularInline):
