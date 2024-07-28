@@ -12,6 +12,16 @@
   {% endfor %}
 {% endblock %}
 
+{% block og_block %}
+  {% for item in og %}
+    <meta property="og:title" content="{{item.title}}" />
+    <meta property="og:type" content="{{item.type}}" />
+    <meta property="og:url" content="{{item.url}}" />
+    <meta property="og:image" content="{{item.image.url}}" />
+    <meta property="og:description" content="{{item.description}}" />
+  {% endfor %}
+{% endblock %}
+
 {% block about_template %}  
     <div class="mt-5">
         <h1>About Us</h1> 

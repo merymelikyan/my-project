@@ -1,7 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}
-  All Employees
+{% block seo_block %}
+  {% for item in seo %}
+  <title> {{item.title}} </title>
+  <meta name="title" content="{{item.title}}">
+  <meta name="description" content="{{item.description}}">
+  <meta name="keywords" content="{{item.keywords}}">
+  <meta name="robots" content="{{item.robots}}">
+  <meta http-equiv="Content-Type" content="{{item.content_type}}">
+  <meta name="language" content="{{item.language}}">
+  {% endfor %}
+{% endblock %}
+
+{% block og_block %}
+  {% for item in og %}
+    <meta property="og:title" content="{{item.title}}" />
+    <meta property="og:type" content="{{item.type}}" />
+    <meta property="og:url" content="{{item.url}}" />
+    <meta property="og:image" content="{{item.image.url}}" />
+    <meta property="og:description" content="{{item.description}}" />
+  {% endfor %}
 {% endblock %}
 
 {% block employees_template %} 
