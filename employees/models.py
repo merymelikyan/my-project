@@ -13,6 +13,7 @@ class Department(models.Model):
          verbose_name = "department"
          verbose_name_plural = "departments"
 
+
 class Employee(models.Model):
     first_name =models.CharField(max_length=55)
     last_name =models.CharField(max_length=55)
@@ -71,6 +72,7 @@ class Team(models.Model):
         verbose_name = "team"
         verbose_name_plural = "teams"
 
+
 class Slider(models.Model):
     img = models.ImageField(upload_to="slider")
     title = models.CharField(max_length=255)
@@ -84,4 +86,19 @@ class Slider(models.Model):
         verbose_name = "slider"
         verbose_name_plural = "sliders"
 
- 
+
+class SEO(models.Model):
+    tag = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    description = models.TextField(max_length=500)
+    keywords = models.CharField(max_length=255)
+    robots = models.CharField(max_length=255)
+    content_type = models.CharField(max_length=255)
+    language = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.tag}"
+
+    class Meta:
+        verbose_name = "seo"
+        verbose_name_plural = "seo"

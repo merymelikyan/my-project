@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Department, Employee, About, Contact, Team, Slider)
+from .models import (Department, Employee, About, Contact, Team, Slider, SEO)
 
 
 admin.site.site_header = "Employees Admin"
@@ -35,3 +35,4 @@ admin.site.register(About)
 admin.site.register(Contact)
 admin.site.register(Team)
 admin.site.register(Slider)
+admin.site.register(SEO)

@@ -1,8 +1,16 @@
 {% extends "base.html" %}
   
-{% block title %}
-  Employees Official
-{% endblock %}  
+{% block seo_block %}
+  {% for item in seo %}
+    <title> {{item.title}} </title>
+    <meta name="title" content="{{item.title}}">
+    <meta name="description" content="{{item.description}}">
+    <meta name="keywords" content="{{item.keywords}}">
+    <meta name="robots" content="{{item.robots}}">
+    <meta http-equiv="Content-Type" content="{{item.content_type}}">
+    <meta name="language" content="{{item.language}}">
+  {% endfor %}
+{% endblock %}
 
 {% block home_template %}  
   <div class="mt-5 text-center">
@@ -15,19 +23,19 @@
         {% for slide in slides %}
         <div class="swiper-slide position-static">
           <div 
-          class="slider-conten position-absolute p-5"
+            class="slider-conten position-absolute p-5"
             style="
-            max-width: 300px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            top: 50px;
-            left: 30px;
+              max-width: 300px;
+              background: rgba(0, 0, 0, 0.8);
+              color: #fff;
+              top: 50px;
+              left: 30px;
             "
           >
             <h3>{{slide.title}}</h3>
             <p>{{slide.descr}}</p>
             {% if slide.link %}
-            <a class="btn btn-success" href="{{slide.link}}">Read More</a>
+              <a class="btn btn-success" href="{{slide.link}}">Read More</a>
             {% endif %}
           </div>
           <img src="{{slide.img.url}}" alt="{{slide.title}}">
