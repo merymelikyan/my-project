@@ -1,4 +1,5 @@
 from pathlib import Path
+from django.utils.translation import gettext_lazy 
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "employees.apps.EmployeesConfig",
     "api.apps.ApiConfig",
-    "tastypie"
+    "tastypie",
+    "rosetta",
 ]
 
 MIDDLEWARE = [
@@ -39,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'base.urls'
@@ -54,6 +57,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'base.context_processors.languages',
             ],
         },
     },
@@ -91,17 +95,27 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-EN'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+USE_L_10 = True
 
 USE_TZ = True
+
+LANGUAGES = [
+    ("en", ("ENG")),
+    ("ru", ("RUS")),
+    ("hy", ("ARM")),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, "locale")
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

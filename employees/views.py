@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from django.http import JsonResponse
+from django.utils.translation import activate, get_language
+from django.utils import translation
+from django.views.decorators.http import require_POST
 from .models import (
     Department, 
     Employee, 
@@ -10,15 +14,18 @@ from .models import (
     OG
     )
 
+
 def index(request):
     slides = Slider.objects.all()
     seo = SEO.objects.filter(tag="home")
     og = OG.objects.filter(tag="home")
+
     return render(request, "home.html", {
         "slides": slides,
         "seo": seo,
-        "og": og
-    })
+        "og": og,
+        #request": request
+        })
 
 def employees(request):
     employees = Employee.objects.all()
@@ -73,3 +80,12 @@ def single_member(request, member_id):
         "seo" : seo,
         "og": og
     })
+
+@require_POST
+def change_lang(request):
+    language = request.POST.get("language")
+    if language:
+        activate(language)
+        request.session[translation.LANGUAGE_SESSION_KEY] = language
+        return JsonResponse({"success": True, "language": get_language()})
+    return JsonResponse({"success": False})
